@@ -1,0 +1,34 @@
+<form [formGroup]='cocktailForm' (ngSubmit)='submit()'>
+  <div class="form-group d-flex flex-column">
+    <label>Nom du cocktail</label>
+    <input formControlName='name' type="text">
+  </div>
+  <div class="form-group d-flex flex-column">
+    <label>Image du cocktail</label>
+    <input formControlName='img' type="text">
+  </div>
+  <div class="form-group d-flex flex-column">
+    <label>description du cocktail</label>
+    <textarea formControlName='description'></textarea>
+  </div>
+  <hr>
+  <button (click)='addIngredients()' class="btn btn-primary" type="button">Ajouter ingredient</button>
+  
+  <div formArrayName='ingredients'>
+    <div [formGroupName]='index' *ngFor='let ingredient of ingredients.controls; let index = index'>
+      <div class="form-group d-flex flex-column">
+        <label>Nom</label>
+        <input formControlName='name' type="text">
+      </div>
+      <div class="form-group d-flex flex-column">
+        <label>quantité</label>
+        <input formControlName='quantity' type="number">
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div class="d-flex flex-row flex-justify-content-between m-20">
+    <button [disabled]='cocktailForm.invalid'  type="submit" class="btn btn-primary">valider</button>
+    <button type="button" routerLink='..' class="btn btn-accent">annuler</button>
+  </div>
+</form>
